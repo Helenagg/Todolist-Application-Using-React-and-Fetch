@@ -1,25 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+const loading = false;
 
 //create your first component
 const Home = () => {
+
+	//const list = ['Hello', 'Hello','Hello']	
+	const [loading, setLoading] = useState(true);
+	const [task, setTask] = useState([]);
+
+	useEffect (() => {
+		//console.log('Hola');
+		fetch('https://assets.breatheco.de/apis/fake/todos/user/testApiFs27', {method: 'GET'})
+		.then(response => 
+			response.json()
+			).then(response => {
+				//console.log(response),
+				setLoading(false),
+				setTask(response)
+			}
+	)}, []);
+
 	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
+		<>
+			<div className="text-center pt-5">
+				<h1>Task list</h1>
+				{loading ? "Loading..." : <div  className="d-flex flex-column justify-content-center">{task.map(element => { return <p className="border border-2 border-light">{element.label}</p>})}
+				</div>}
+			</div>
+		</>
 	);
 };
 
