@@ -25,7 +25,7 @@ const Home = () => {
 		<>
 			<div className="text-center pt-5">
 				<h1>Task list</h1>
-				{loading ? "Loading..." : <div  className="d-flex flex-column justify-content-center">{task.map(element => { return <p className="border border-2 border-light">{element.label}</p>})}
+				{loading ? "Loading..." : <div  className="d-grid gap-2 col-3 p-5 mx-auto">{task.map(element => { return <p className="border border-2 border-light">{element.label}</p>})}
 				</div>}
 			</div>
 		</>
@@ -33,3 +33,4 @@ const Home = () => {
 };
 
 export default Home;
+//d-flex flex-column justify-content-center
